@@ -68,7 +68,7 @@ void singleClick(){
 void doubleClick(){
   Serial.println("doble hate");
   Serial.println(ms);
-  if(men_act == 1 && ms == 2 || men_act == 2){
+  if(men_act == 1 && ms == 2 || men_act == 2 || men_act == 3){
     lcd.clear();
       lp = 0;
     menu_cali2();
@@ -79,7 +79,7 @@ void doubleClick(){
     Serial.println("te odias demasiado2"); 
     men_act = 0;
   }
-  else if(men_act == 1 && ms == 1 || men_act == 2){
+  else if(men_act == 1 && ms == 1 || men_act == 2 || men_act == 3){
     lcd.clear();
       lp = 0;
     menu_cali1();
@@ -91,7 +91,7 @@ void doubleClick(){
     men_act = 0;
   }
 
-  else if(men_act == 1 && ms == 3 || men_act == 2){
+  else if(men_act == 1 && ms == 3 || men_act == 2 || men_act == 3){
     lcd.clear();
       lp = 0;
     menu_cali3();
@@ -112,6 +112,9 @@ void doubleClick(){
   countS3 = 0;
   seguro = 0;
   count = 0;
+  countP1 = 0;
+  countP2 = 0;
+  countP3 = 0;
   count2 = 0;
   ser = 0;
 }

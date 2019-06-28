@@ -26,7 +26,7 @@ byte flecha[] = {
   B00000
 };
 
-byte flechaR[] = {
+byte q[] = {
   B00000,
   B00000,
   B00100,
@@ -197,8 +197,6 @@ void setup() {
   lcd.begin();
   Serial.begin(9600);
   lcd.createChar(10,flecha);
-  lcd.createChar(flechaR,flechaR);
-
   lcd.createChar(3,f);
   lcd.createChar(4,a);
   lcd.createChar(5,c);
@@ -206,6 +204,7 @@ void setup() {
   lcd.createChar(7,o);
   lcd.createChar(8,r);
   lcd.createChar(9,s);
+  lcd.createChar(11,q);
     
   Serial.println("Basic Encoder Test:");
   inicio();
@@ -271,7 +270,7 @@ else if(seguro == 2){
     lcd.setCursor(9,3);
     lcd.print(accel_ang_x); 
     myser.write(countG);
-    Serial.println(countG);   
+    Serial.println(accel_ang_x);   
      }
    }
 
@@ -371,13 +370,37 @@ else if(seguro == 8){
 }
 
 else if(seguro == 9){
+  digitalWrite(13,HIGH);
   long newPosition = myEnc.read()/4;
   if (newPosition != oldPosition) {
+    digitalWrite(13,LOW);
     if(newPosition < oldPosition){
       countP1 -= 0.1; 
+//********************************************
+      digitalWrite(dirPin, HIGH);
+      // Spin the stepper motor 1 revolution slowly:
+      for (int i = 0; i < 2.4; i++) {
+        // These four lines result in 1 step:
+        digitalWrite(stepPin, HIGH);
+        delayMicroseconds(600);
+        digitalWrite(stepPin, LOW);
+        delayMicroseconds(600);
+      }
+//********************************************
     }    
     else if(newPosition > oldPosition){
      countP1 += 0.1;
+     //**************************************************
+     digitalWrite(dirPin, LOW);
+    // Spin the stepper motor 1 revolution slowly:
+    for (int i = 0; i < 2.4; i++) {
+    // These four lines result in 1 step:
+      digitalWrite(stepPin, HIGH);
+      delayMicroseconds(600);
+      digitalWrite(stepPin, LOW);
+      delayMicroseconds(600);
+    }
+     //**************************************************
     }
     oldPosition = newPosition;
     if(countP1 < -10){
@@ -388,20 +411,44 @@ else if(seguro == 9){
       }
       clear_pasos();
       lcd.setCursor(7,3);
-      lcd.print(countP1);
+      lcd.print(countP3 + countP2 + countP1);
      }
     }
 
 
 
 else if(seguro == 10){
+  digitalWrite(13,HIGH);
   long newPosition = myEnc.read()/4;
   if (newPosition != oldPosition) {
+    digitalWrite(13,LOW);
     if(newPosition < oldPosition){
       countP2 -= 1; 
+      //******************************************
+      digitalWrite(dirPin, HIGH);
+      // Spin the stepper motor 1 revolution slowly:
+      for (int i = 0; i < 24; i++) {
+        // These four lines result in 1 step:
+        digitalWrite(stepPin, HIGH);
+        delayMicroseconds(600);
+        digitalWrite(stepPin, LOW);
+        delayMicroseconds(600);
+        }
+      //******************************************
     }    
     else if(newPosition > oldPosition){
      countP2 += 1;
+     //******************************************
+     digitalWrite(dirPin, LOW);
+  // Spin the stepper motor 1 revolution slowly:
+  for (int i = 0; i < 24; i++) {
+    // These four lines result in 1 step:
+    digitalWrite(stepPin, HIGH);
+    delayMicroseconds(600);
+    digitalWrite(stepPin, LOW);
+    delayMicroseconds(600);
+  }
+  //************************************
     }
     oldPosition = newPosition;
     if(countP2 > 10){
@@ -413,19 +460,43 @@ else if(seguro == 10){
       clear_pasos();
       Serial.println(countP2);
       lcd.setCursor(7,3);
-      lcd.print(countP2);
+      lcd.print(countP3 + countP2 + countP1);
      }
     }
 
 
 else if(seguro == 11){
+  digitalWrite(13,HIGH);
   long newPosition = myEnc.read()/4;
   if (newPosition != oldPosition) {
+    digitalWrite(13,LOW);
     if(newPosition < oldPosition){
       countP3 -= 2; 
+      //*****************
+      digitalWrite(dirPin, HIGH);
+    // Spin the stepper motor 1 revolution slowly:
+      for (int i = 0; i < 240; i++) {
+      // These four lines result in 1 step:
+        digitalWrite(stepPin, HIGH);
+        delayMicroseconds(600);
+        digitalWrite(stepPin, LOW);
+        delayMicroseconds(600);
+    }
+      //********************
     }    
     else if(newPosition > oldPosition){
      countP3 += 2;
+     //***************
+     digitalWrite(dirPin, LOW);
+  // Spin the stepper motor 1 revolution slowly:
+  for (int i = 0; i < 240; i++) {
+    // These four lines result in 1 step:
+    digitalWrite(stepPin, HIGH);
+    delayMicroseconds(600);
+    digitalWrite(stepPin, LOW);
+    delayMicroseconds(600);
+  }
+     //***************
     }
     oldPosition = newPosition;
     if(countP3 < -10){
@@ -437,7 +508,7 @@ else if(seguro == 11){
       clear_pasos();
       Serial.println(countP3);
       lcd.setCursor(7,3);
-      lcd.print(countP3);
+      lcd.print(countP3 + countP2 + countP1);
      }
     }
 

@@ -3,7 +3,7 @@ void inicio(){
   lcd.setCursor(0,0);
   lcd.print("    DentalOS ");
   lcd.setCursor(4,1);
-  lcd.print("Version: 1.9.6");
+  lcd.print("Version: 1.9.9");
   lcd.setCursor(6,2);
   lcd.print(char(3));
   lcd.print(char(4));
@@ -50,6 +50,7 @@ void seguro_lcd(){
   lcd.write(10);
   lcd.setCursor(8,3);
   lcd.print("Si");
+  lp = 1;
 }
 
 
@@ -77,11 +78,11 @@ void cali_ser(){
   lcd.setCursor(6,1);
   lcd.print("El angulo");
   lcd.setCursor(5,2);
-  lcd.print("-");
-  lcd.setCursor(5,3);
-  lcd.print(char(flechaR));
-  lcd.setCursor(14,2);
   lcd.print("+");
+  lcd.setCursor(5,3);
+  lcd.print(char(11));
+  lcd.setCursor(14,2);
+  lcd.print("-");
   lcd.setCursor(14,3);
   lcd.print(char(10)); 
   seguro = 2;
@@ -90,7 +91,7 @@ void cali_ser(){
 //**************************************************************
 void calibrar1(){
  digitalWrite(13,LOW);
- //x = -4;
+ x = -6;
  myser.write(30);
  lcd.setCursor(5,0);
  lcd.print("calibrando");
@@ -136,7 +137,7 @@ void calibrar1(){
  lcd.write(10);
 //*******************************************
  menu_cali1();
- countG = 59;
+ countG = 57;
  seguro = 6;
  count = 0;
  count2 = 0;
@@ -148,6 +149,7 @@ void calibrar1(){
 
 void calibrar2(){
 digitalWrite(13,LOW);
+ x = -3;
  myser.write(30);
  lcd.setCursor(5,0);
  lcd.print("calibrando");
@@ -195,9 +197,9 @@ digitalWrite(13,LOW);
  menu_cali2();
  seguro = 7;
  count = 0;
+ countG = 56;
  count2 = 0;
  ser = 0;
-  x = -4;
  ms = 2;
 //*******************************************
  
@@ -207,7 +209,7 @@ digitalWrite(13,LOW);
 
 void calibrar3(){
 digitalWrite(13,LOW);
- x = 44;
+ x = 41;
  countG = 104;
  myser.write(30);
  lcd.setCursor(5,0);
@@ -300,6 +302,7 @@ void menu_escalas(){
   lcd.print("1 mm");
   lcd.setCursor(1,2);
   lcd.print("2 mm");
+  men_act = 3;
 }
 
 void menu_cali1(){
@@ -353,7 +356,7 @@ void mover_01mm(){
   lcd.setCursor(5,2);
   lcd.print("-");
   lcd.setCursor(5,3);
-  lcd.print(char(flechaR));
+  lcd.print(char(11));
   lcd.setCursor(14,2);
   lcd.print("+");
   lcd.setCursor(14,3);
@@ -371,7 +374,7 @@ void mover_1mm(){
   lcd.setCursor(5,2);
   lcd.print("-");
   lcd.setCursor(5,3);
-  lcd.print(char(flechaR));
+  lcd.print(char(11));
   lcd.setCursor(14,2);
   lcd.print("+");
   lcd.setCursor(14,3);
@@ -388,7 +391,7 @@ void mover_2mm(){
   lcd.setCursor(5,2);
   lcd.print("-");
   lcd.setCursor(5,3);
-  lcd.print(char(flechaR));
+  lcd.print(char(11));
   lcd.setCursor(14,2);
   lcd.print("+");
   lcd.setCursor(14,3);
