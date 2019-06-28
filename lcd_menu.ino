@@ -3,7 +3,7 @@ void inicio(){
   lcd.setCursor(0,0);
   lcd.print("    DentalOS ");
   lcd.setCursor(4,1);
-  lcd.print("Version: 1.9.9");
+  lcd.print("Version: 2.0");
   lcd.setCursor(6,2);
   lcd.print(char(3));
   lcd.print(char(4));
